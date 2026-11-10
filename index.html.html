@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>iCaRe FMD.XMS – Ultrasound Questionnaire</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍏</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<style>
+:root{
+  --leaf:#2f7d4f; --leaf-d:#1d5436; --mint:#e4f4dc; --lime:#b7e07a; --peach:#ffb48a; --berry:#d9455f;
+  --cream:#fbfff4; --ink:#1c3326; --bubble-me:#c9efa6; --bubble-bot:#fff;
+  --bg1:#d7f0c2; --bg2:#fff1d6;
+}
+@media (prefers-color-scheme:dark){
+  :root{--cream:#14241a;--ink:#e9f6e0;--bubble-bot:#22382b;--bubble-me:#3f7a45;--mint:#1b3324;--bg1:#0f1f15;--bg2:#1a2b1f}
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:Nunito,system-ui,sans-serif;color:var(--ink);background:linear-gradient(170deg,var(--bg1),var(--bg2));
+  padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0);display:flex;justify-content:center}
+.app{width:100%;max-width:520px;height:100%;display:flex;flex-direction:column;background:var(--cream);position:relative;overflow:hidden}
+.screen{display:none;flex:1;flex-direction:column;min-height:0}
+.screen.on{display:flex}
+/* cover */
+.cover{background:url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%20520%20300%27%20preserveAspectRatio=%27xMidYMax%20slice%27%3E%3Cdefs%3E%3ClinearGradient%20id=%27s%27%20x1=%270%27%20y1=%270%27%20x2=%270%27%20y2=%271%27%3E%3Cstop%20offset=%270%27%20stop-color=%27%233f8fcf%27/%3E%3Cstop%20offset=%27.65%27%20stop-color=%27%23a9dcd0%27/%3E%3Cstop%20offset=%271%27%20stop-color=%27%23f7efc2%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width=%27520%27%20height=%27300%27%20fill=%27url%28%23s%29%27/%3E%3Ccircle%20cx=%27410%27%20cy=%2762%27%20r=%2726%27%20fill=%27%23fff4b0%27/%3E%3Ccircle%20cx=%27410%27%20cy=%2762%27%20r=%2740%27%20fill=%27%23fff4b0%27%20opacity=%27.25%27/%3E%3Cpath%20d=%27M0%20200%20L60%20130%20L110%20170%20L190%2070%20L265%20175%20L335%20105%20L405%20180%20L465%20130%20L520%20185%20V300H0Z%27%20fill=%27%236f98ad%27/%3E%3Cpath%20d=%27M190%2070%20L165%20108%20L185%20100%20L200%20112%20L214%2098Z%20M335%20105%20L318%20128%20L333%20122%20L347%20130Z%27%20fill=%27%23fff%27/%3E%3Cpath%20d=%27M0%20222%20Q90%20175%20185%20210%20T350%20198%20T520%20192%20V300H0Z%27%20fill=%27%2368b36f%27/%3E%3Cpath%20d=%27M110%20258%20Q250%20238%20430%20260%20Q300%20286%20110%20258Z%27%20fill=%27%235db7da%27%20opacity=%27.9%27/%3E%3Cpath%20d=%27M150%20258%20Q250%20250%20380%20259%27%20stroke=%27%23fff%27%20stroke-opacity=%27.6%27%20stroke-width=%272%27%20fill=%27none%27/%3E%3Cpath%20d=%27M0%20262%20Q120%20224%20260%20254%20T520%20240%20V300H0Z%27%20fill=%27%232f7d4f%27/%3E%3Cg%20fill=%27%231d5436%27%3E%3Cpath%20d=%27M40%20256%20l14%20-46%20l14%2046Z%27/%3E%3Cpath%20d=%27M62%20262%20l12%20-38%20l12%2038Z%27/%3E%3Cpath%20d=%27M455%20250%20l14%20-48%20l14%2048Z%27/%3E%3Cpath%20d=%27M482%20258%20l11%20-34%20l11%2034Z%27/%3E%3C/g%3E%3Cg%20fill=%27%23e85d4a%27%3E%3Ccircle%20cx=%27120%27%20cy=%27268%27%20r=%274%27/%3E%3Ccircle%20cx=%27330%27%20cy=%27272%27%20r=%274%27/%3E%3Ccircle%20cx=%27410%27%20cy=%27266%27%20r=%274%27/%3E%3C/g%3E%3C/svg%3E") center bottom/cover no-repeat,#58a85a;min-height:230px;
+  color:#fff;text-align:center;padding:36px 24px 70px;position:relative}
+.cover h1{font-family:Pacifico,cursive;font-weight:400;font-size:clamp(1.9rem,9vw,2.7rem);letter-spacing:.5px;text-shadow:0 2px 8px #0005;line-height:1.2}
+.cover p{font-size:1.15rem;font-weight:700;margin-top:6px;text-shadow:0 1px 8px #0007}
+.fruits{font-size:2.2rem;letter-spacing:6px;margin:14px 0 4px;filter:drop-shadow(0 3px 4px #0003)}
+.hills{position:absolute;left:0;right:0;bottom:-1px;height:56px}
+.panel{padding:22px;overflow:auto;flex:1}
+.panel h2{font-family:Fraunces,serif;font-size:1.3rem;margin-bottom:6px}
+.panel p.hint{opacity:.8;font-size:.95rem;margin-bottom:14px}
+input,textarea{font:inherit;color:inherit;width:100%;border:2px solid var(--lime);border-radius:16px;padding:12px 14px;background:var(--cream);outline:none}
+input:focus,textarea:focus{border-color:var(--leaf)}
+.btn{font:inherit;font-weight:700;border:0;border-radius:999px;padding:13px 22px;background:var(--leaf);color:#fff;cursor:pointer;width:100%;margin-top:12px}
+.btn.alt{background:var(--peach);color:#4a2412}
+.btn.ghost{background:transparent;color:var(--leaf);border:2px solid var(--leaf)}
+.btn:disabled{opacity:.5}
+.btn:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--berry);outline-offset:2px}
+.status{display:flex;align-items:center;gap:8px;font-size:.9rem;font-weight:600;margin:14px 0}
+.dot{width:10px;height:10px;border-radius:50%;background:#bbb}
+.dot.ok{background:#2dbd5a;box-shadow:0 0 0 4px #2dbd5a33}
+.code{font-family:Fraunces,serif;font-size:2.6rem;letter-spacing:8px;text-align:center;background:var(--mint);border-radius:20px;padding:14px;margin:10px 0}
+/* chat */
+.chead{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--leaf);color:#fff}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--lime);display:grid;place-items:center;font-size:1.4rem}
+.chead b{display:block;line-height:1.1}.chead small{opacity:.85}
+.prog{height:4px;background:#0003}.prog i{display:block;height:100%;width:0;background:var(--peach);transition:width .4s}
+.msgs{flex:1;overflow:auto;padding:14px 12px;display:flex;flex-direction:column;gap:8px;
+  background:var(--mint) radial-gradient(circle at 90% 90%,#b7e07a44 0,#0000 30%)}
+.m{max-width:82%;padding:10px 13px;border-radius:18px;line-height:1.35;white-space:pre-wrap;word-wrap:break-word;box-shadow:0 1px 2px #0002}
+.m.bot{background:var(--bubble-bot);border-bottom-left-radius:4px;align-self:flex-start}
+.m.me{background:var(--bubble-me);border-bottom-right-radius:4px;align-self:flex-end}
+.m.final{background:var(--lime);color:#17351f;align-self:center;max-width:92%;text-align:center;border-radius:20px;font-weight:600}
+.typing{display:flex;gap:4px;padding:14px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--leaf);animation:b 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes b{50%{transform:translateY(-5px);opacity:.5}}
+.composer{display:flex;gap:8px;padding:10px;background:var(--cream);border-top:1px solid #0001;align-items:flex-end}
+.composer textarea{border-radius:22px;resize:none;max-height:110px;min-height:46px}
+.send{width:48px;height:48px;flex:none;border-radius:50%;border:0;background:var(--leaf);color:#fff;font-size:1.3rem;cursor:pointer}
+.send:disabled{opacity:.4}
+.msgs{user-select:none;-webkit-user-select:none}
+.choices{display:none;flex-direction:column;gap:8px;padding:10px;background:var(--cream);border-top:1px solid #0001;max-height:48%;overflow:auto}
+.choices.on{display:flex}
+.choice{font:inherit;font-weight:700;text-align:left;border:2px solid var(--lime);background:var(--cream);color:var(--ink);border-radius:16px;padding:11px 14px;cursor:pointer}
+.choice:active,.choice:focus-visible{border-color:var(--leaf);background:var(--mint)}
+.composer.off{display:none}
+.warnbox{border:3px solid var(--berry)}
+/* modal */
+.modal{position:absolute;inset:0;background:#0007;display:none;align-items:center;justify-content:center;padding:24px;z-index:9}
+.modal.on{display:flex}
+.card{background:var(--cream);border-radius:24px;padding:22px;width:100%;text-align:center;animation:pop .2s}
+@keyframes pop{from{transform:scale(.92);opacity:0}}
+.card h3{font-family:Fraunces,serif;margin-bottom:6px}
+.card .quote{background:var(--mint);border-radius:14px;padding:10px;margin:10px 0;font-style:italic;word-wrap:break-word}
+/* inbox */
+.item{background:var(--mint);border-radius:16px;padding:12px 14px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.item div{flex:1;min-width:0}.item b{display:block;overflow:hidden;text-overflow:ellipsis}
+.item .btn{width:auto;margin:0;padding:9px 16px}
+.toast{position:absolute;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ink);color:var(--cream);padding:10px 16px;border-radius:999px;font-size:.9rem;display:none;z-index:10;text-align:center;max-width:90%}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HOME -->
+  <section class="screen on" id="home">
+    <div class="cover">
+      <div class="fruits">🏔️🌿🌊🌳🍎</div>
+      <h1>iCaRe FMD.XMS</h1>
+      <p>Ultrasound questionnaire</p>
+      <svg class="hills" viewBox="0 0 520 56" preserveAspectRatio="none"><path d="M0 30 Q90 0 180 26 T360 22 T520 14 V56 H0Z" fill="var(--cream)"/></svg>
+    </div>
+    <div class="panel">
+      <h2>Who are you?</h2>
+      <p class="hint">Pick your role.</p>
+      <button class="btn" id="goStudent">I'm answering the questionnaire</button>
+      <button class="btn alt" id="goInv">I'm the invigilator (receive answers)</button>
+    </div>
+  </section>
+
+  <!-- INVIGILATOR -->
+  <section class="screen" id="inv">
+    <div class="cover" style="padding-bottom:50px"><div class="fruits">🌄🍃</div><h1 style="font-size:1.8rem">Invigilator</h1></div>
+    <div class="panel">
+      <h2>Connect to receive documents</h2>
+      <p class="hint">Tell students this code. Keep this page open while they answer.</p>
+      <div class="code" id="code">····</div>
+      <div class="status"><span class="dot" id="invDot"></span><span id="invStatus">Starting…</span></div>
+      <h2 style="margin-top:8px">Received</h2>
+      <div id="inbox"><p class="hint" id="emptyInbox">Nothing yet. Documents appear here as students finish.</p></div>
+      <button class="btn ghost" id="invBack">Back</button>
+    </div>
+  </section>
+
+  <!-- STUDENT: connect -->
+  <section class="screen" id="stu">
+    <div class="cover" style="padding-bottom:50px"><div class="fruits">🏞️🌿</div><h1 style="font-size:1.8rem">Before we start</h1></div>
+    <div class="panel">
+      <h2>Your name</h2>
+      <input id="sname" placeholder="Type your name" autocomplete="name">
+      <h2 style="margin-top:16px">Invigilator code</h2>
+      <p class="hint">Ask the invigilator for the 4-digit code. You can also skip this and send later.</p>
+      <input id="scode" inputmode="numeric" maxlength="4" placeholder="e.g. 4821">
+      <div class="status"><span class="dot" id="stuDot"></span><span id="stuStatus">Not connected</span></div>
+      <button class="btn ghost" id="connectBtn">Connect</button>
+      <p class="hint" style="margin-top:14px">📌 Rules: stay on this page until you finish. Switching tabs or apps, or trying to copy or paste, gives a warning. After 3 warnings your answers are submitted automatically and marked as flagged.</p>
+      <button class="btn" id="startBtn">Start the chat</button>
+      <button class="btn ghost" id="stuBack">Back</button>
+    </div>
+  </section>
+
+  <!-- CHAT -->
+  <section class="screen" id="chat">
+    <div class="chead"><div class="avatar">🍏</div><div><b>iCaRe FMD.XMS</b><small id="chatSub">online</small></div></div>
+    <div class="prog"><i id="bar"></i></div>
+    <div class="msgs" id="msgs" aria-live="polite"></div>
+    <div class="choices" id="choices"></div>
+    <div class="composer" id="composer">
+      <textarea id="input" rows="1" placeholder="Type your answer…" disabled></textarea>
+      <button class="send" id="send" disabled aria-label="Send answer">➤</button>
+    </div>
+  </section>
+
+  <div class="modal" id="confirm">
+    <div class="card">
+      <h3>Are you sure?</h3>
+      <div class="quote" id="confirmText"></div>
+      <button class="btn" id="yes">Yes, send this answer</button>
+      <button class="btn alt" id="change">Change my answer</button>
+    </div>
+  </div>
+  <div class="modal" id="after">
+    <div class="card">
+      <h3 id="afterTitle">All done 🍏</h3>
+      <p id="afterMsg" class="hint"></p>
+      <button class="btn" id="saveAgain">Save document again</button>
+      <button class="btn alt" id="resend">Send to invigilator again</button>
+      <button class="btn ghost" id="restart">Close</button>
+    </div>
+  </div>
+  <div class="modal" id="warn" style="z-index:12">
+    <div class="card warnbox">
+      <h3 id="warnTitle">⚠ Warning</h3>
+      <p id="warnMsg" class="hint"></p>
+      <button class="btn" id="warnOk">I understand, continue</button>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+/* ================= EDIT HERE ================= */
+const QUESTIONS = [
+  {"q": "Case Study 1\n\n• A 7-week pregnant woman presents with mild vaginal spotting.\n• Cervical os is closed.\n• A live intrauterine embryo with cardiac activity is demonstrated.\n• No significant perigestational collection is seen.\n\nWhat is the most likely diagnosis?"},
+  {"q": "Case Study 2\n\n• A 9-week pregnant woman presents with vaginal bleeding and lower abdominal cramps.\n• The cervical os is slightly open.\n• Products of conception are partially seen within the endometrial cavity.\n• No fetal cardiac activity is demonstrated.\n\nWhat is the most likely diagnosis?"},
+  {"q": "Case Study 3\n\n• A 10-week pregnant woman presents with heavy vaginal bleeding.\n• The cervical os is open.\n• Heterogeneous echogenic material is seen within the endometrial cavity.\n• No identifiable gestational sac remains.\n\nWhat is the most likely diagnosis?"},
+  {"q": "Case Study 4\n\n• A 9-week pregnant woman complains of persistent lower abdominal pain.\n• A gestational sac is demonstrated within the uterus.\n• The embryo measures consistent with 8 weeks.\n• No cardiac activity is demonstrated despite adequate visualization.\n\nWhat is the most likely diagnosis?"},
+  {"q": "Case Study 5\n\n• An 8-week pregnant woman presents for routine scanning.\n• An intrauterine gestational sac is demonstrated.\n• Mean sac diameter measures 27 mm.\n• No yolk sac or embryo is identified.\n\nWhat is the most likely diagnosis?"},
+  {"q": "Case Study 6\n\n• A 7-week pregnant woman presents with mild vaginal bleeding.\n• A live embryo is demonstrated.\n• A crescent-shaped hypoechoic collection is seen adjacent to the gestational sac.\n• The collection does not communicate with the gestational cavity.\n\nWhat is the most likely diagnosis?"},
+  {"q": "Case Study 7\n\n• A 10-week pregnant woman presents with excessive vomiting and vaginal bleeding.\n• The uterus appears larger than expected for gestational age.\n• Multiple small cystic spaces produce a heterogeneous vesicular appearance.\n• No normal embryo is identified.\n\nWhat is the most likely diagnosis?"},
+  {"q": "Case Study 8\n\n• A 6-week pregnant woman presents with unilateral pelvic pain.\n• No definite intrauterine gestational sac is demonstrated.\n• A gestational sac-like structure is seen in the right adnexa.\n• Moderate free fluid is present in the pouch of Douglas.\n\nWhat is the most likely diagnosis?"},
+  {"q": "Case Study 9\n\n• A 7-week pregnant woman presents with unilateral pelvic pain.\n• An intrauterine live pregnancy is demonstrated.\n• A separate complex right adnexal mass is identified.\n• A small amount of pelvic free fluid is present.\n\nWhat is the most likely diagnosis?"},
+  {"q": "Case Study 10\n\n• A 6-week pregnant woman presents with vaginal spotting.\n• A gestational sac is identified within the uterus.\n• An echogenic protrusion is seen arising from the chorionic surface.\n• Embryonic cardiac activity is present.\n\nWhat is the most likely diagnosis?"},
+  {"q": "Case Study 11\n\n• A 9-week pregnant woman presents for dating.\n• Two intrauterine embryos are demonstrated.\n• Both embryos have cardiac activity.\n• One embryo measures significantly smaller than the other.\n\nWhat is the most likely diagnosis?"},
+  {"q": "Case Study 12\n\n• An 8-week pregnant woman presents with vaginal bleeding.\n• The gestational sac is intrauterine.\n• The embryo is visible but demonstrates a heart rate significantly below the expected range.\n• No obvious adnexal abnormality is seen.\n\nWhat is the most likely diagnosis?"},
+  {"q": "Case Study 13\n\n• An 11-week pregnant woman presents with persistent vaginal bleeding.\n• The uterus contains multiple cystic spaces.\n• A fetal structure with cardiac activity is identified.\n• The placenta appears unusually thick and heterogeneous.\n\nWhat is the most likely diagnosis?"},
+  {"q": "Case Study 14\n\n• A 9-week pregnant woman presents with pelvic discomfort.\n• An intrauterine gestational sac and yolk sac are demonstrated.\n• No embryo is identified.\n• The sac appears irregular with a relatively small size for the expected dates.\n\nWhat is the most likely diagnosis?"},
+  {"q": "Case Study 15\n\n• A 10-week pregnant woman presents with persistent spotting.\n• A live embryo is demonstrated.\n• The gestational sac is low within the uterine cavity.\n• The sac is implanted within the previous caesarean section scar region.\n\nWhat is the most likely diagnosis?"},
+  {"q": "Question 16\n\nWhat is generally regarded as the first sonographic sign of an early intrauterine pregnancy?", "options": ["A. Yolk sac", "B. Gestational sac", "C. Fetal pole", "D. Cardiac activity"]},
+  {"q": "Question 17\n\nWhich ultrasound measurement is most reliable for dating a viable pregnancy during the first trimester once the embryo is visible?", "options": ["A. Mean sac diameter", "B. Crown-rump length", "C. Biparietal diameter", "D. Abdominal circumference"]},
+  {"q": "Question 18\n\nAt approximately what gestational age can embryonic cardiac activity commonly first be detected using transvaginal ultrasound?", "options": ["A. 3 weeks", "B. 4 weeks", "C. 5½–6 weeks", "D. 9 weeks"]},
+  {"q": "Question 19\n\nWhich structure is normally expected to appear inside the gestational sac before the embryo becomes clearly visible?", "options": ["A. Amnion", "B. Yolk sac", "C. Chorionic bump", "D. Placental cotyledon"]},
+  {"q": "Question 20\n\nWhat is the primary purpose of measuring the mean sac diameter (MSD) in early pregnancy?", "options": ["A. To determine fetal weight", "B. To estimate early gestational age when the embryo is not yet measurable", "C. To determine fetal presentation", "D. To assess fetal growth restriction"]},
+  {"q": "Question 21\n\nWhich ultrasound finding is most concerning for an early pregnancy loss?", "options": ["A. Gestational sac measuring 12 mm without an embryo", "B. Yolk sac measuring 4 mm", "C. Embryo with CRL of 8 mm and no cardiac activity", "D. Small amount of free fluid in the pouch of Douglas"]},
+  {"q": "Question 22\n\nIn early pregnancy ultrasound, what is the significance of the double decidual sac sign?", "options": ["A. It confirms fetal viability.", "B. It supports the presence of an intrauterine gestational sac.", "C. It confirms multiple pregnancy.", "D. It indicates an ectopic pregnancy."]},
+  {"q": "Question 23\n\nWhich of the following is the preferred ultrasound approach for evaluating very early pregnancy when abdominal scanning is inconclusive?", "options": ["A. Transabdominal ultrasound with a full bladder only", "B. Transvaginal ultrasound", "C. Transperineal ultrasound only", "D. Doppler ultrasound only"]},
+  {"q": "Question 24\n\nWhich structure is primarily responsible for early embryonic nutrient exchange before the placenta becomes fully functional?", "options": ["A. Yolk sac", "B. Amnion", "C. Cervix", "D. Myometrium"]},
+  {"q": "Question 25\n\nA patient has a positive pregnancy test, but no definite intrauterine or extrauterine pregnancy is identified on ultrasound. What is the appropriate classification?", "options": ["A. Missed miscarriage", "B. Pregnancy of unknown location", "C. Blighted ovum", "D. Complete miscarriage"], "last": true}
+];
+const INTRO = "Instructions: Carefully study each clinical and sonographic clue and identify the most likely first-trimester pathology. Each case contains 3–5 clues.\n\nAre you ready?";
+const FINAL_MESSAGE = "Assessment complete. Thank you, your answers have been recorded. 🍎";
+const MAX_WARNINGS = 3;       // the 3rd violation submits automatically
+const PREFIX = "icare-app-";   // PeerJS id prefix (change if you like)
+/* ============================================= */
+
+const $ = id => document.getElementById(id);
+const show = id => { document.querySelectorAll('.screen').forEach(s => s.classList.remove('on')); $(id).classList.add('on'); };
+const toast = t => { const e = $('toast'); e.textContent = t; e.style.display='block'; clearTimeout(toast.t); toast.t=setTimeout(()=>e.style.display='none',3500); };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+/* ---------- Navigation ---------- */
+$('goStudent').onclick = () => show('stu');
+$('goInv').onclick = () => { show('inv'); startInvigilator(); };
+$('stuBack').onclick = () => show('home');
+$('invBack').onclick = () => show('home');
+
+/* ---------- Invigilator (receiver) ---------- */
+let invPeer = null, invConns = 0;
+function startInvigilator(){
+  if (invPeer) return;
+  const code = String(Math.floor(1000 + Math.random()*9000));
+  $('code').textContent = code;
+  try {
+    invPeer = new Peer(PREFIX + code);
+  } catch(e){ $('invStatus').textContent = 'Could not start. Check your internet.'; return; }
+  invPeer.on('open', () => { $('invDot').classList.add('ok'); $('invStatus').textContent = 'Ready. Waiting for students…'; });
+  invPeer.on('error', e => {
+    if (e.type === 'unavailable-id'){ invPeer.destroy(); invPeer = null; startInvigilator(); return; }
+    $('invDot').classList.remove('ok'); $('invStatus').textContent = 'Connection problem: ' + e.type;
+  });
+  invPeer.on('disconnected', () => { try{ invPeer.reconnect(); }catch(e){} });
+  invPeer.on('connection', c => {
+    c.on('open', () => { invConns++; $('invStatus').textContent = invConns + ' student(s) connected'; });
+    c.on('close', () => { invConns = Math.max(0, invConns-1); $('invStatus').textContent = invConns ? invConns + ' student(s) connected' : 'Ready. Waiting for students…'; });
+    c.on('data', d => {
+      if (!d || !d.html) return;
+      addInbox(d);
+      c.send({ ack: d.id });
+      try { navigator.vibrate && navigator.vibrate(200); } catch(e){}
+    });
+  });
+}
+function addInbox(d){
+  $('emptyInbox') && $('emptyInbox').remove();
+  const blob = new Blob(['\ufeff', d.html], { type: 'application/msword' });
+  const url = URL.createObjectURL(blob);
+  const row = document.createElement('div'); row.className = 'item';
+  row.innerHTML = '<div><b>' + esc(d.name) + (d.flagged ? ' ⚠ flagged' : '') + '</b><small>' + new Date().toLocaleTimeString() + '</small></div>';
+  const a = document.createElement('a'); a.className = 'btn'; a.textContent = 'Download';
+  a.href = url; a.download = d.filename; a.style.textDecoration = 'none';
+  row.appendChild(a); $('inbox').prepend(row);
+  toast('New document from ' + d.name);
+}
+
+/* ---------- Student: connect ---------- */
+let sPeer = null, sConn = null;
+function setStu(ok, txt){ $('stuDot').classList.toggle('ok', ok); $('stuStatus').textContent = txt; }
+$('connectBtn').onclick = () => {
+  const code = $('scode').value.trim();
+  if (!/^\d{4}$/.test(code)) { toast('Enter the 4-digit code'); return; }
+  connectToInvigilator(code);
+};
+function connectToInvigilator(code){
+  setStu(false, 'Connecting…');
+  try { sPeer && sPeer.destroy(); } catch(e){}
+  sPeer = new Peer();
+  sPeer.on('open', () => {
+    sConn = sPeer.connect(PREFIX + code, { reliable: true });
+    sConn.on('open', () => setStu(true, 'Connected to invigilator ✓'));
+    sConn.on('close', () => setStu(false, 'Disconnected'));
+    sConn.on('data', d => { if (d && d.ack && pending && pending.id === d.ack){ pending.sent = true; updateAfter(); } });
+    setTimeout(() => { if (!sConn.open) setStu(false, 'Could not connect. Check the code.'); }, 9000);
+  });
+  sPeer.on('error', () => setStu(false, 'Could not connect. Check the code and internet.'));
+}
+
+/* ---------- Chat ---------- */
+let idx = 0, answers = [], draft = '', studentName = '', pending = null;
+$('startBtn').onclick = () => {
+  studentName = $('sname').value.trim();
+  if (!studentName) { toast('Please type your name'); return; }
+  show('chat'); idx = 0; answers = []; $('msgs').innerHTML = ''; startGuard(); intro();
+};
+function bubble(text, cls){ const d = document.createElement('div'); d.className = 'm ' + cls; d.textContent = text; $('msgs').appendChild(d); $('msgs').scrollTop = 1e9; return d; }
+async function ask(){
+  hideChoices();
+  $('input').disabled = true; $('send').disabled = true;
+  const t = document.createElement('div'); t.className = 'm bot typing'; t.innerHTML = '<i></i><i></i><i></i>';
+  $('msgs').appendChild(t); $('msgs').scrollTop = 1e9;
+  await sleep(700);
+  t.remove(); bubble(QUESTIONS[idx].q, 'bot');
+  $('bar').style.width = (idx / QUESTIONS.length * 100) + '%';
+  const o = QUESTIONS[idx].options;
+  if (o){ showChoices(o, v => { draft = v; $('confirmText').textContent = v; $('confirm').classList.add('on'); }); }
+  else { $('input').disabled = false; $('send').disabled = false; $('input').value = ''; $('input').focus(); }
+}
+function showChoices(list, cb){
+  const box = $('choices'); box.innerHTML = '';
+  list.forEach(t => { const b = document.createElement('button'); b.className = 'choice'; b.textContent = t; b.onclick = () => cb(t); box.appendChild(b); });
+  box.classList.add('on'); $('composer').classList.add('off'); box.scrollTop = 0;
+}
+function hideChoices(){ $('choices').classList.remove('on'); $('composer').classList.remove('off'); }
+async function intro(){
+  hideChoices(); $('input').disabled = true; $('send').disabled = true;
+  await sleep(500); bubble(INTRO, 'bot');
+  showChoices(["Yes, I'm ready"], async v => { hideChoices(); bubble(v, 'me'); await sleep(300); ask(); });
+}
+$('input').addEventListener('input', e => { e.target.style.height = 'auto'; e.target.style.height = Math.min(e.target.scrollHeight, 110) + 'px'; });
+$('send').onclick = () => {
+  const v = $('input').value.trim();
+  if (!v) { toast('Type an answer first'); return; }
+  draft = v; $('confirmText').textContent = v; $('confirm').classList.add('on');
+};
+$('change').onclick = () => { $('confirm').classList.remove('on'); $('input').focus(); };
+$('yes').onclick = async () => {
+  $('confirm').classList.remove('on'); hideChoices();
+  bubble(draft, 'me'); answers.push({ q: QUESTIONS[idx].q, a: draft });
+  $('input').value = ''; $('input').style.height = 'auto';
+  if (QUESTIONS[idx].last){ await finish(); return; }
+  idx++; ask();
+};
+
+async function finish(auto){
+  stopGuard();
+  $('confirm').classList.remove('on');
+  $('input').disabled = true; $('send').disabled = true;
+  if (!auto){ $('bar').style.width = '100%'; await sleep(600); bubble(FINAL_MESSAGE, 'final'); await sleep(900); }
+  else bubble('Submitted automatically after repeated rule violations.', 'final');
+  const html = buildDoc(auto);
+  const stamp = new Date().toISOString().slice(0,16).replace(/[:T]/g,'-');
+  const filename = 'iCaRe-' + studentName.replace(/[^\w]+/g,'_') + '-' + stamp + '.doc';
+  pending = { id: Date.now() + '-' + Math.random().toString(36).slice(2), name: studentName, filename, html, flagged: violations.length > 0, sent: false };
+  saveLocal();                 // backup on this phone
+  trySend();                   // send to invigilator
+  $('afterTitle').textContent = auto ? 'Submitted automatically' : 'All done 🍏';
+  $('after').classList.add('on'); updateAfter();
+}
+function buildDoc(auto){
+  const flag = violations.length ? '<div style="border:2px solid #d9455f;padding:8px;margin:10px 0"><h2 style="color:#d9455f">⚠ FLAGGED: ' + violations.length + ' violation(s)' + (auto ? ' – SUBMITTED AUTOMATICALLY (incomplete)' : '') + '</h2><ul>' + violations.map(v => '<li>' + esc(v.time) + ' – ' + esc(v.type) + '</li>').join('') + '</ul></div>' : '';
+  const unans = auto ? QUESTIONS.slice(answers.length).map((x,i) => '<p><b>Q' + (answers.length+i+1) + '. ' + esc(x.q).replace(/\n/g,'<br>') + '</b></p><p style="margin-left:18px;color:#999">(not answered)</p>').join('') : '';
+  const rows = answers.map((x,i) => '<p><b>Q' + (i+1) + '. ' + esc(x.q).replace(/\n/g,'<br>') + '</b></p><p style="margin-left:18px;color:#1d5436">' + esc(x.a).replace(/\n/g,'<br>') + '</p>').join('');
+  return '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><title>iCaRe</title></head><body style="font-family:Calibri,Arial">' +
+    '<h1 style="color:#2f7d4f">iCaRe FMD.XMS – Ultrasound Questionnaire</h1><p><b>Name:</b> ' + esc(studentName) + '<br><b>Date:</b> ' + new Date().toLocaleString() + '</p><hr>' + flag + rows + unans + '<hr><p><i>' + (auto ? '' : esc(FINAL_MESSAGE)) + '</i></p></body></html>';
+}
+/* ---------- Anti-cheat guard ---------- */
+let violations = [], guardOn = false, lastV = 0;
+function startGuard(){
+  guardOn = true; violations = [];
+  try { document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); } catch(e){}
+}
+function stopGuard(){
+  guardOn = false;
+  try { document.fullscreenElement && document.exitFullscreen(); } catch(e){}
+}
+function violate(type){
+  if (!guardOn) return;
+  const n = Date.now(); if (n - lastV < 1500) return;   // one event = one count
+  lastV = n;
+  violations.push({ type, time: new Date().toLocaleTimeString() });
+  const c = violations.length;
+  if (c >= MAX_WARNINGS){ $('warn').classList.remove('on'); finish(true); return; }
+  $('warnTitle').textContent = '⚠ Warning ' + c + ' of ' + MAX_WARNINGS;
+  $('warnMsg').textContent = type + '. This has been recorded. At warning ' + MAX_WARNINGS + ' your answers are submitted automatically.';
+  $('warn').classList.add('on');
+}
+$('warnOk').onclick = () => $('warn').classList.remove('on');
+document.addEventListener('visibilitychange', () => { if (document.hidden) violate('You left the page (tab or app switch)'); });
+window.addEventListener('blur', () => violate('The page lost focus'));
+['copy','cut','paste'].forEach(t => document.addEventListener(t, e => { if (guardOn){ e.preventDefault(); violate('You tried to ' + t + ' text'); } }));
+document.addEventListener('contextmenu', e => { if (guardOn) e.preventDefault(); });
+
+function saveLocal(){
+  const blob = new Blob(['\ufeff', pending.html], { type: 'application/msword' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = pending.filename;
+  document.body.appendChild(a); a.click(); a.remove();
+}
+function trySend(){
+  if (sConn && sConn.open){ sConn.send({ id: pending.id, name: pending.name, filename: pending.filename, flagged: pending.flagged, html: pending.html }); return true; }
+  return false;
+}
+function updateAfter(){
+  if (!pending) return;
+  $('afterMsg').textContent = pending.sent
+    ? 'Your answers were saved to this phone (Downloads) and delivered to the invigilator. ✓'
+    : (sConn && sConn.open ? 'Saved to this phone. Sending to the invigilator…' : 'Saved to this phone (Downloads). Not connected to the invigilator yet. Connect, then tap "Send to invigilator again".');
+}
+$('saveAgain').onclick = () => pending && saveLocal();
+$('resend').onclick = () => {
+  if (trySend()) { toast('Sent. Waiting for confirmation…'); return; }
+  const c = $('scode').value.trim();
+  if (/^\d{4}$/.test(c)){ connectToInvigilator(c); toast('Reconnecting… tap again in a few seconds'); }
+  else toast('Not connected. Ask for the code and reconnect.');
+};
+$('restart').onclick = () => { $('after').classList.remove('on'); show('home'); };
+</script>
+</body>
+</html>
